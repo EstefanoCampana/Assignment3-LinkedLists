@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Assignment3_LinkedLists
 {
@@ -15,6 +16,147 @@ namespace Assignment3_LinkedLists
         public Node Head { get => head; set => head = value; }
         public Node Tail { get => tail; set => tail = value; }
         public int ListSize { get => listSize; set => listSize = value; }
+
+        public void AddBegin(object data)
+        {
+            Node newNode = new Node(data);
+            if (Head == null)
+            {
+                Tail = newNode;
+            }
+            else
+            {
+                newNode.Next = Head;
+            }
+            Head = newNode;
+            ListSize++;
+        }
+
+        public void AddEnd(object data)
+        {
+            Node newNode = new Node(data);
+            if (Head == null)
+            {
+                Head = newNode;
+            }
+            else
+            {
+                Tail!.Next = newNode;
+            }
+            Tail = newNode;
+            ListSize++;
+        }
+
+        public void RemoveAt(int index)
+        {
+            Node current = Head;
+            if (index < 0 || index > ListSize)
+            {
+                throw new EmptyListException(index);
+            }
+            else
+            {
+                if (index == 0)
+                {
+                    RemoveStart();
+                }
+                else if (index == ListSize - 1)
+                {
+                    RemoveEnd();
+                }
+                else
+                {
+                    for (int i = 0; i <= index; i++)
+                    {
+                        Console.WriteLine(i);
+                        if (i == index-1)
+                        {
+                            current.Next = current.Next.Next;
+                        }
+                        current = current.Next;
+                    }
+                }
+                ListSize--;
+            }
+        }
+
+        public void RemoveStart()
+        {
+            if (Head != null)
+            {
+                Head = Head.Next;
+                if(Head == null)
+                {
+                    Tail = null;
+                }
+                ListSize--;
+            }
+            else
+            {
+                throw new EmptyListException();
+            }
+        }
+
+        public void RemoveEnd()
+        {
+            if (Head != null)
+            {
+                if (Head.Next == null)
+                {
+                    Head = null;
+                    Tail = null;
+                }
+                else
+                {
+                    Node current = Head;
+                    while(current.Next!.Next != null)
+                    {
+                        current = current.Next;
+                    }
+                    current.Next = null;
+                    Tail = current;
+                }
+                ListSize--;
+            }
+            else
+            {
+                throw new EmptyListException();
+            }
+        }
+
+        public void InsertAt(int index, object data)
+        {
+            Node newNode = new Node(data);
+            Node current = Head;
+            if (index < 0 || index > ListSize)
+            {
+                throw new EmptyListException(index);
+            }
+            else
+            {
+                if (index == 0)
+                {
+                    AddBegin(data);
+                }
+                else if (index == ListSize - 1)
+                {
+                    AddEnd(data);
+                }
+                else
+                {
+                    for (int i = 0; i <= index; i++)
+                    {
+                        if (i == index - 1)
+                        {
+                            newNode.Next = current.Next;
+                            current.Next = newNode;
+                        }
+                        current = current.Next;
+                    }
+                }
+                ListSize++;
+            }
+        }
 
         public void Append(object data)
         {
