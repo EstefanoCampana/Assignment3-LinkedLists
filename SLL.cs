@@ -50,7 +50,7 @@ namespace Assignment3_LinkedLists
         public void RemoveAt(int index)
         {
             Node current = Head;
-            if (index < 0 || index > ListSize)
+            if (index < 0 || index > (ListSize -1))
             {
                 throw new EmptyListException(index);
             }
@@ -60,7 +60,7 @@ namespace Assignment3_LinkedLists
                 {
                     RemoveStart();
                 }
-                else if (index == ListSize - 1)
+                else if (index == (ListSize-1))
                 {
                     RemoveEnd();
                 }
@@ -68,15 +68,14 @@ namespace Assignment3_LinkedLists
                 {
                     for (int i = 0; i <= index; i++)
                     {
-                        Console.WriteLine(i);
-                        if (i == index-1)
+                        if (i == (index-1))
                         {
                             current.Next = current.Next.Next;
                         }
                         current = current.Next;
                     }
+                    ListSize--;
                 }
-                ListSize--;
             }
         }
 
