@@ -10,6 +10,37 @@ namespace Assignment3_LinkedLists
     public interface LinkedListADT
     {
         /// <summary>
+        /// Prepend an item to the beginning of the linked list
+        /// </summary>
+        void AddBegin(Object data);
+
+        /// <summary>
+        /// Append an item to the end of the linked list
+        /// </summary>
+        void AddEnd(Object data);
+
+        /// <summary>
+        /// Remove an item at an index in the linked list
+        /// </summary>
+        void RemoveAt(int index);
+
+        /// <summary>
+        /// Remove an item from the start of the linked list
+        /// </summary>
+        void RemoveStart();
+
+        /// <summary>
+        /// Remove an item from the end of the linked list
+        /// </summary>
+        void RemoveEnd();
+
+        /// <summary>
+        /// Insert an item at a specific index in the linked list
+        /// </summary>
+        void InsertAt(int index, Object data);
+
+
+        /// <summary>
         /// Checks if the list is empty.
         /// </summary>
         /// <returns>True if it is empty.</returns>
